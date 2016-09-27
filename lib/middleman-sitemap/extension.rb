@@ -91,7 +91,7 @@ class Sitemap < ::Middleman::Extension
 
   # Returns a URL with proper HTML entities
   def encode(path)
-    str = path.split("/").map { |f| app.escape_html(f) }.join("/")
+    str = path.split("/").map { |f| app.generic_template_context.escape_html(f) }.join("/")
     return str
   end
 
