@@ -31,7 +31,7 @@ class Sitemap < ::Middleman::Extension
     if options.gzip
       sitemaps.each do |sitemap|
         gzip_file(sitemap)
-        @builder.say_status :create, "#{sitemap}.gz" if @builder
+        @builder.trigger :create, "#{sitemap}.gz" if @builder
       end
     end
   end
@@ -46,7 +46,7 @@ class Sitemap < ::Middleman::Extension
     outfile = File.join(app.config[:build_dir], "sitemap.xml")
     File.open(outfile, 'w') {|f| f.write(sitemap) }
 
-    @builder.say_status :create, "#{app.config[:build_dir]}/sitemap.xml"
+    @builder.trigger :create, "#{app.config[:build_dir]}/sitemap.xml"
 
     return "#{app.config[:build_dir]}/sitemap.xml"
   end
@@ -61,7 +61,7 @@ class Sitemap < ::Middleman::Extension
     outfile = File.join(app.config[:build_dir], name)
     File.open(outfile, 'w') {|f| f.write(sitemap) }
 
-    @builder.say_status :create, "#{app.config[:build_dir]}/#{name}"
+    @builder.trigger :create, "#{app.config[:build_dir]}/#{name}"
 
     return "#{app.config[:build_dir]}/#{name}"
   end
